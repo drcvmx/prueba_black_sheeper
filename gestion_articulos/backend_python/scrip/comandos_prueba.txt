@@ -1,0 +1,34 @@
+COMANDOS PARA PROBAR LA API
+============================
+
+Abre una NUEVA terminal PowerShell y ejecuta estos comandos:
+
+1. Ver todos los artículos:
+   curl http://localhost:8000/v1/public/articulos
+
+2. Buscar "agua":
+   curl "http://localhost:8000/v1/public/articulos?q=agua"
+
+3. Paginación (2 resultados):
+   curl "http://localhost:8000/v1/public/articulos?limit=2&offset=0"
+
+4. Artículo específico (ID 3356):
+   curl http://localhost:8000/v1/public/articulos/3356
+
+5. Claves del artículo 3356:
+   curl http://localhost:8000/v1/public/articulos/3356/claves
+
+6. Buscar por clave "Prueba1":
+   curl "http://localhost:8000/v1/public/articulos?q=Prueba1"
+
+7. Artículo inexistente (debe dar error 404):
+   curl http://localhost:8000/v1/public/articulos/99999
+
+============================
+DOCUMENTACIÓN INTERACTIVA
+============================
+
+Abre en tu navegador:
+- http://localhost:8000/docs (Swagger - puedes probar los endpoints aquí)
+- http://localhost:8000/redoc (Documentación alternativa)
+- http://localhost:8000 (Info básica de la API)

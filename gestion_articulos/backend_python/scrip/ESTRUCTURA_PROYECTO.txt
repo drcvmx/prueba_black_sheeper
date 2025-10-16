@@ -1,0 +1,286 @@
+📁 ESTRUCTURA COMPLETA DEL PROYECTO
+=====================================
+
+backend/
+│
+├── 📄 main.py                          # API FastAPI principal
+├── 📄 firebird_test.py                 # Script de prueba de conexión
+├── 📄 requirements.txt                 # Dependencias Python
+├── 🗄️ PRUEBAPROG.FDB                   # Base de datos Firebird
+│
+├── 📚 DOCUMENTACIÓN
+│   ├── 📄 README.md                    # Documentación de la API
+│   ├── 📄 INSTRUCCIONES.md             # Guía completa de uso
+│   ├── 📄 RESUMEN_PROYECTO.md          # Resumen del proyecto
+│   ├── 📄 COMO_USAR.md                 # Guía rápida de uso
+│   └── 📄 ESTRUCTURA_PROYECTO.txt      # Este archivo
+│
+├── 🔧 SCRIPTS DE UTILIDAD
+│   ├── 📄 start.ps1                    # Inicia backend + frontend
+│   ├── 📄 test_api.ps1                 # Prueba todos los endpoints
+│   └── 📄 comandos_prueba.txt          # Comandos curl para pruebas
+│
+└── 📁 frontend/                        # Aplicación React
+    │
+    ├── 📁 src/
+    │   ├── 📁 components/
+    │   │   ├── 📄 ArticulosList.tsx    # Lista de artículos
+    │   │   └── 📄 ArticuloDetail.tsx   # Detalle del artículo
+    │   │
+    │   ├── 📄 App.tsx                  # Componente principal
+    │   ├── 📄 main.tsx                 # Punto de entrada
+    │   └── 📄 index.css                # Estilos globales + Tailwind
+    │
+    ├── 📁 public/
+    │   └── 📄 vite.svg                 # Logo de Vite
+    │
+    ├── 📁 node_modules/                # Dependencias (auto-generado)
+    │
+    ├── 📄 package.json                 # Configuración npm
+    ├── 📄 package-lock.json            # Lock de dependencias
+    ├── 📄 vite.config.ts               # Configuración de Vite
+    ├── 📄 tsconfig.json                # Configuración TypeScript
+    ├── 📄 tsconfig.app.json            # Config TS para app
+    ├── 📄 tsconfig.node.json           # Config TS para Node
+    ├── 📄 eslint.config.js             # Configuración ESLint
+    ├── 📄 tailwind.config.js           # Configuración Tailwind CSS
+    ├── 📄 postcss.config.js            # Configuración PostCSS
+    ├── 📄 index.html                   # HTML principal
+    ├── 📄 .gitignore                   # Archivos ignorados por Git
+    ├── 📄 README.md                    # README de Vite (original)
+    └── 📄 README_FRONTEND.md           # Documentación del frontend
+
+
+DESCRIPCIÓN DE ARCHIVOS PRINCIPALES
+====================================
+
+BACKEND
+-------
+main.py
+  - API REST con FastAPI
+  - 3 endpoints implementados
+  - Conexión a Firebird
+  - CORS habilitado
+  - Documentación automática
+
+firebird_test.py
+  - Script de prueba de conexión
+  - Consulta directa a las tablas
+  - Útil para debugging
+
+requirements.txt
+  - fastapi==0.115.0
+  - uvicorn==0.31.0
+  - fdb==2.0.2
+  - pydantic==2.9.2
+
+FRONTEND
+--------
+App.tsx
+  - Componente principal
+  - Layout de la aplicación
+  - Gestión de estado (artículo seleccionado)
+  - Integración de componentes
+
+ArticulosList.tsx
+  - Lista de artículos
+  - Búsqueda en tiempo real
+  - Paginación
+  - Selección de artículo
+  - Indicadores de estatus
+
+ArticuloDetail.tsx
+  - Detalle del artículo seleccionado
+  - Información completa
+  - Claves asociadas
+  - Estados visuales
+
+tailwind.config.js
+  - Configuración de Tailwind CSS
+  - Paleta de colores personalizada:
+    * primary: #adeada
+    * secondary: #bdeadb
+    * tertiary: #cdeadc
+    * quaternary: #ddeadd
+    * quinary: #edeade
+
+SCRIPTS
+-------
+start.ps1
+  - Inicia backend y frontend automáticamente
+  - Abre 2 ventanas de PowerShell
+  - Espera a que el backend inicie
+
+test_api.ps1
+  - Prueba todos los endpoints
+  - 7 tests diferentes
+  - Muestra resultados en consola
+
+DOCUMENTACIÓN
+-------------
+README.md
+  - Documentación de la API
+  - Endpoints disponibles
+  - Ejemplos de uso
+  - Códigos de respuesta
+
+INSTRUCCIONES.md
+  - Guía completa de instalación
+  - Cómo ejecutar el sistema
+  - URLs del sistema
+  - Solución de problemas
+
+RESUMEN_PROYECTO.md
+  - Resumen ejecutivo
+  - Tecnologías utilizadas
+  - Estado del proyecto
+  - Próximos pasos
+
+COMO_USAR.md
+  - Guía rápida de uso
+  - Paso a paso
+  - Tips y trucos
+  - Solución de problemas comunes
+
+
+FLUJO DE DATOS
+==============
+
+1. Usuario abre http://localhost:5173
+   ↓
+2. React carga App.tsx
+   ↓
+3. App.tsx renderiza ArticulosList y ArticuloDetail
+   ↓
+4. ArticulosList hace fetch a http://localhost:8000/v1/public/articulos
+   ↓
+5. FastAPI (main.py) recibe la petición
+   ↓
+6. main.py consulta la base de datos Firebird (PRUEBAPROG.FDB)
+   ↓
+7. Firebird devuelve los datos
+   ↓
+8. FastAPI formatea la respuesta JSON
+   ↓
+9. React recibe los datos y actualiza la UI
+   ↓
+10. Usuario hace clic en un artículo
+    ↓
+11. ArticuloDetail hace fetch a /v1/public/articulos/{id}
+    ↓
+12. ArticuloDetail hace fetch a /v1/public/articulos/{id}/claves
+    ↓
+13. Se muestra el detalle completo
+
+
+PUERTOS UTILIZADOS
+==================
+
+8000  - Backend API (FastAPI)
+5173  - Frontend (React + Vite)
+3050  - Firebird Database
+
+
+TECNOLOGÍAS
+===========
+
+Backend:
+  - Python 3.10
+  - FastAPI 0.115.0
+  - Uvicorn 0.31.0
+  - fdb 2.0.2
+  - Pydantic 2.9.2
+
+Frontend:
+  - React 18
+  - TypeScript
+  - Vite
+  - Tailwind CSS 3
+  - PostCSS
+  - Autoprefixer
+
+Base de Datos:
+  - Firebird 3.0
+
+Herramientas:
+  - ESLint
+  - PowerShell (scripts)
+
+
+COMANDOS ÚTILES
+===============
+
+Backend:
+  python main.py                    # Iniciar API
+  python firebird_test.py           # Probar conexión
+  pip install -r requirements.txt   # Instalar dependencias
+
+Frontend:
+  cd frontend
+  npm install                       # Instalar dependencias
+  npm run dev                       # Modo desarrollo
+  npm run build                     # Build producción
+  npm run preview                   # Preview del build
+
+Scripts:
+  .\start.ps1                       # Iniciar todo
+  .\test_api.ps1                    # Probar API
+
+Pruebas:
+  curl http://localhost:8000/v1/public/articulos
+  curl http://localhost:8000/v1/public/articulos/3356
+  curl http://localhost:8000/v1/public/articulos/3356/claves
+
+
+URLS IMPORTANTES
+================
+
+Frontend:
+  http://localhost:5173              # Aplicación React
+
+Backend:
+  http://localhost:8000              # API REST
+  http://localhost:8000/docs         # Swagger UI
+  http://localhost:8000/redoc        # ReDoc
+
+Endpoints:
+  GET /v1/public/articulos           # Listar artículos
+  GET /v1/public/articulos/{id}      # Obtener artículo
+  GET /v1/public/articulos/{id}/claves  # Obtener claves
+
+
+TAMAÑO APROXIMADO
+=================
+
+Backend:
+  main.py                 ~6 KB
+  firebird_test.py        ~2 KB
+  requirements.txt        ~100 bytes
+
+Frontend:
+  src/ (código fuente)    ~15 KB
+  node_modules/           ~50 MB
+  build/ (compilado)      ~500 KB
+
+Documentación:
+  *.md files              ~50 KB
+
+Total (sin node_modules): ~100 KB
+Total (con node_modules): ~50 MB
+
+
+ESTADO DEL PROYECTO
+===================
+
+✅ Backend API funcionando
+✅ Frontend React funcionando
+✅ Conexión a Firebird OK
+✅ CORS configurado
+✅ Documentación completa
+✅ Scripts de utilidad listos
+✅ Paleta de colores implementada
+✅ Responsive design
+✅ TypeScript sin errores
+✅ ESLint configurado
+
+🎉 PROYECTO COMPLETO Y FUNCIONAL 🎉
